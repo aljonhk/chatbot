@@ -10,7 +10,7 @@
 
         body {
             margin: 0;
-            font-size: 50px;
+            font-size: 40px;
         }
 
         h1 {
@@ -19,7 +19,8 @@
             line-height: 20px;
             color: whitesmoke;
             display: table-cell;
-            padding: 13px 0px 0px 20px;
+            padding: 15px 0px 0px 20px;
+
         }
 
         #heading {
@@ -63,16 +64,13 @@
 
            // Add styleOptions to customize Web Chat canvas
            backgroundColor: 'rgba(255, 255, 255, 0)',
-           bubbleBackground: 'rgba(144, 238, 144, 1)',
+
+           bubbleBackground: 'rgba(225, 247, 193, 1)',
+           bubbleBorderColor: 'rgba(127, 178, 57, .4)',
            bubbleFromUserBackground: 'rgba(255, 255, 255, 1)',
-           hideUploadButton: false
+           bubbleFromUserBorderColor: 'rgba(127, 178, 57, .4)',
+
         };
-        // Change font family and weight. 
-        styleOptions.textContent = {
-         ...styleOptions.textContent,
-         fontFamily: "'Comic Sans MS', 'Arial', sans-serif",
-         fontWeight: 'bold'
-      };
 
         var theURL = "https://default4c78e6b3d76d41288f5e361798f1e5.cf.environment.api.powerplatform.com/powervirtualagents/bots/b4773428-ae00-4a09-a4bb-5c3e866420ef/directline/token?api-version=2022-03-01-preview";
 
@@ -89,6 +87,31 @@
                     directline = data.channelUrlsById.directline;
                     })
                 .catch(err => console.error("An error occurred: " + err));
+        
+        const store = window.WebChat.createStore(
+         {},
+         ({ dispatch }) => next => action => {
+             if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+                dispatch({
+                    meta: {
+                         method: "keyboard",
+                     },
+                     payload: {
+                         activity: {
+                               channelData: {
+                                    postBack: true,
+                               },
+                                //Web Chat will show the 'Greeting' System Topic message which has a trigger-phrase 'hello'
+                                name: 'startConversation',
+                                type: "event"
+                           },
+                      },
+                      type: "DIRECT_LINE/POST_ACTIVITY",
+                 });
+           }
+           return next(action);
+        }
+        );
 
       fetch(theURL)
             .then(response => response.json())
@@ -99,6 +122,7 @@
                             domain: `${directline}v3/directline`,
                             token: conversationInfo.token,
                         }),
+                        store,
                         styleOptions
                     },
                     document.getElementById('webchat')
