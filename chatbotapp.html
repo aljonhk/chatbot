@@ -10,10 +10,11 @@
 
         body {
             margin: 0;
+            font-size: 21px;
         }
 
         h1 {
-            font-size: 16px;
+            font-size: 21px;
             font-family: Segoe UI;
             line-height: 20px;
             color: whitesmoke;
@@ -22,7 +23,7 @@
         }
 
         #heading {
-            background-color: black;
+            background-color: #7FB239;
             height: 50px;
         }
 
@@ -61,14 +62,17 @@
         const styleOptions = {
 
            // Add styleOptions to customize Web Chat canvas
-           rootHeight: '100%',
-           rootWidth: '100%',
-           bubbleBackground: 'rgba(0, 0, 255, .1)',
-           bubbleFromUserBackground: 'rgba(0, 255, 0, .1)',
-           backgroundColor: "rgba(0, 0, 255, .1)",
+           rootHeight: '99%',
+           bubbleBackground: 'rgba(144, 238, 144, .1)',
+           bubbleFromUserBackground: 'rgba(255, 255, 255, .1)',
            hideUploadButton: false
         };
-
+        // Change font family and weight. 
+        styleOptions.textContent = {
+         ...styleOptions.textContent,
+         fontFamily: "'Comic Sans MS', 'Arial', sans-serif",
+         fontWeight: 'bold'
+      };
 
         var theURL = "https://default4c78e6b3d76d41288f5e361798f1e5.cf.environment.api.powerplatform.com/powervirtualagents/bots/b4773428-ae00-4a09-a4bb-5c3e866420ef/directline/token?api-version=2022-03-01-preview";
 
