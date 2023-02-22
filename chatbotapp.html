@@ -69,12 +69,7 @@
            bubbleBorderColor: 'rgba(127, 178, 57, .4)',
            bubbleFromUserBackground: 'rgba(255, 255, 255, 1)',
            bubbleFromUserBorderColor: 'rgba(127, 178, 57, .4)',
-        };
-        const avatarOptions = {
-           //botAvatarImage: 'https://bot-framework.azureedge.net/bot-icons-v1/b4773428-ae00-4a09-a4bb-5c3e866420ef_EsT6vJDsU1P9EfyEUAFqu3nl2KW2ScExFA5H8iUGf85VSDUd.png',
-           botAvatarInitials: 'HK',
-           //userAvatarImage: 'https://cdn-icons-png.flaticon.com/512/2102/2102633.png',
-           userAvatarInitials: 'U'
+
         };
 
         var theURL = "https://default4c78e6b3d76d41288f5e361798f1e5.cf.environment.api.powerplatform.com/powervirtualagents/bots/b4773428-ae00-4a09-a4bb-5c3e866420ef/directline/token?api-version=2022-03-01-preview";
@@ -128,8 +123,7 @@
                             token: conversationInfo.token,
                         }),
                         store,
-                        styleOptions,
-                        styleOptions: avatarOptions
+                        styleOptions
                     },
                     document.getElementById('webchat')
                 );
